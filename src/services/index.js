@@ -1,5 +1,7 @@
 const PeopleServices = require('./PeopleServices')
+const LevelsServices = require('./LevelsServices')
 
 module.exports = {
-  PeopleServices: PeopleServices
+  PeopleServices: PeopleServices,
+  LevelsServices: LevelsServices
 }
