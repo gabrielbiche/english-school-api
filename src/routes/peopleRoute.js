@@ -8,7 +8,7 @@ router.get('/people/all', PeopleController.getAllPeople)
 router.get('/people', PeopleController.getActivePeople)
 router.get('/people/:id', PeopleController.getAPerson)
 router.get(
-  '/people/:studentId/matriculation',
+  '/people/:studentId/Registrations',
   PeopleController.getAllEnrollmentsFromOnePerson
 )
 router.post('/people', PeopleController.createPerson)
