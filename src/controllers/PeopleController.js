@@ -24,7 +24,7 @@ class PeopleController {
   static async getAPerson(request, response) {
     const { id } = request.params
     try {
-      const result = await peopleServices.getOne(Number(id))
+      const result = await peopleServices.getOnePerson(Number(id))
       return response.status(200).json(result)
     } catch (error) {
       return response.status(400).json({ Error: error.message })
@@ -45,8 +45,8 @@ class PeopleController {
     const { id } = request.params
     const data = request.body
     try {
-      await peopleServices.update(data, Number(id))
-      const result = await peopleServices.getOne(Number(id))
+      await peopleServices.updatePerson(data, Number(id))
+      const result = await peopleServices.getOnePerson(Number(id))
       return response.status(200).json(result)
     } catch (error) {
       return response.status(400).json({ Error: error.message })
@@ -56,7 +56,7 @@ class PeopleController {
   static async deletePerson(request, response) {
     const { id } = request.params
     try {
-      await peopleServices.destroy(Number(id))
+      await peopleServices.deletePerson(Number(id))
       return response
         .status(200)
         .json({ Message: `People with id: ${id} deleted` })
@@ -89,17 +89,6 @@ class PeopleController {
     }
   }
 
-  static async getAllEnrollmentsFromOnePerson(request, response) {
-    const { studentId } = request.params
-    try {
-      const result = await peopleServices.getAllEnrollmentsFromOnePerson({
-        id: Number(studentId)
-      })
-      return response.status(200).json(result)
-    } catch (error) {
-      return response.status(400).json({ Message: error.message })
-    }
-  }
 }
 
 module.exports = PeopleController

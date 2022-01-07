@@ -1,12 +1,12 @@
 'use strict'
+
 const { Model } = require('sequelize')
+
 module.exports = (sequelize, DataTypes) => {
   class People extends Model {
     static associate(models) {
       People.hasMany(models.Registrations, {
-        foreignKey: 'student_id',
-        scope: { status: 'active' },
-        as: 'enrolledClazzes'
+        foreignKey: 'student_id'
       })
       People.hasMany(models.Clazzes, { foreignKey: 'teacher_id' })
     }
