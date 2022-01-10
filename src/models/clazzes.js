@@ -1,5 +1,9 @@
 'use strict'
-const { Model } = require('sequelize')
+
+const moment = require('moment')
+
+const { Model, Sequelize } = require('sequelize')
+
 module.exports = (sequelize, DataTypes) => {
   class Clazzes extends Model {
     static associate(models) {
@@ -10,7 +14,24 @@ module.exports = (sequelize, DataTypes) => {
   }
   Clazzes.init(
     {
-      start_date: DataTypes.DATEONLY
+      start_date: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: 'Please enter start date.'
+          },
+          validateEntryDate: date => {
+            const currentDate = moment()
+            const validDate = moment(date).isSameOrAfter(currentDate, 'month')
+            if (!validDate) {
+              throw new Error(
+                'The starting date of the class must be the same month as the current month or later.'
+              )
+            }
+          }
+        }
+      }
     },
     {
       sequelize,
