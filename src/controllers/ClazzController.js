@@ -23,7 +23,12 @@ class ClazzController {
     const { id } = request.params
     try {
       const result = await clazzesServices.getOne(Number(id))
-      return response.status(200).json(result)
+      return response.status(200).json({
+        id: result.id,
+        start_date: result.start_date,
+        teacher_id: result.teacher_id,
+        level_id: result.level_id
+      })
     } catch (error) {
       return response.status(400).json({ Message: error.message })
     }
@@ -37,7 +42,12 @@ class ClazzController {
         teacher_id,
         level_id
       })
-      return response.status(201).json(result)
+      return response.status(201).json({
+        id: result.id,
+        start_date: result.start_date,
+        teacher_id: result.teacher_id,
+        level_id: result.level_id
+      })
     } catch (error) {
       return response.status(400).json({ Message: error.message })
     }
