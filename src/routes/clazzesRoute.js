@@ -4,10 +4,10 @@ const ClazzController = require('../controllers/ClazzController')
 
 const router = Router()
 
-router.get('/classes', ClazzController.getAllClazzes)
-router.get('/classes/:id', ClazzController.getOneClazz)
-router.post('/classes', ClazzController.createClazz)
-router.put('/classes/:id', ClazzController.updateClazz)
-router.delete('/classes/:id', ClazzController.deleteClazz)
+router.get('/classes', ClazzController.getAll)
+router.get('/classes/:id', ClazzController.getOne)
+router.post('/classes', ClazzController.create)
+router.put('/classes/:id', ClazzController.update)
+router.delete('/classes/:id', ClazzController.delete)
 
 module.exports = router
