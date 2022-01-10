@@ -9,7 +9,16 @@ module.exports = (sequelize, DataTypes) => {
   }
   Registrations.init(
     {
-      status: DataTypes.STRING
+      status: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          isIn: {
+            args: [['active', 'inactive']],
+            msg: 'Status accepted: active or inactive.'
+          }
+        }
+      }
     },
     {
       sequelize,
