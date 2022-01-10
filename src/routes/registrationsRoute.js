@@ -6,23 +6,23 @@ const router = Router()
 
 router.get(
   '/people/:studentId/registration/:registrationId',
-  RegistrationController.getARegistration
+  RegistrationController.getOne
 )
 router.get(
   '/people/registration/:classeId',
-  RegistrationController.getAllRegistrationsFromOneClazz
+  RegistrationController.getRegistrationsPerClass
 )
 router.post(
-  '/people/:studentId/registration',
-  RegistrationController.createRegistration
+  '/people/:studentId/registration', 
+  RegistrationController.create
 )
 router.put(
   '/people/:studentId/registration/:registrationId/',
-  RegistrationController.updateRegistration
+  RegistrationController.update
 )
 router.delete(
   '/people/:studentId/registration/:registrationId',
-  RegistrationController.deleteRegistration
+  RegistrationController.delete
 )
 
 module.exports = router

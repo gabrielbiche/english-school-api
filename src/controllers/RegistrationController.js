@@ -2,70 +2,81 @@ const { RegistrationsServices } = require('../services')
 const registrationsServices = new RegistrationsServices()
 
 class RegistrationController {
-  static async getARegistration(request, response) {
+  static async getOne(request, response) {
     const { studentId, registrationId } = request.params
     try {
-      const result = await registrationsServices.getOne({
+      const result = await registrationsServices.getOneRegistration({
         id: Number(registrationId),
         student_id: Number(studentId)
       })
-      return response.status(200).json(result)
+      return response.status(200).json({
+        id: result.id,
+        status: result.status,
+        student_id: result.student_id,
+        clazz_id: result.clazz_id
+      })
     } catch (error) {
       return response.status(400).json({ Message: error.message })
     }
   }
 
-  static async createRegistration(request, response) {
+  static async create(request, response) {
     const { studentId } = request.params
-    const data = { ...request.body, student_id: Number(studentId) }
+    const { status, clazz_id } = request.body
     try {
-      const result = await registrationsServices.create(data)
-      return response.status(201).json(result)
+      const result = await registrationsServices.create({
+        status,
+        student_id: Number(studentId),
+        clazz_id
+      })
+      return response.status(201).json({
+        id: result.id,
+        status: result.status,
+        student_id: result.student_id,
+        clazz_id: result.clazz_id
+      })
     } catch (error) {
       console.log(error)
       return response.status(400).json({ Message: error.message })
     }
   }
 
-  static async updateRegistration(request, response) {
+  static async update(request, response) {
     const { studentId, registrationId } = request.params
-    const data = request.body
+    const { status, student_id, clazz_id } = request.body
     try {
-      await registrationsServices.update(data, {
-        id: Number(registrationId),
-        student_id: Number(studentId)
-      })
-      const result = await registrationsServices.getOne({
-        id: Number(registrationId),
-        student_id: Number(studentId)
-      })
-      return response.status(200).json(result)
+      await registrationsServices.updateRegistrations(
+        { status, student_id, clazz_id },
+        {
+          id: Number(registrationId),
+          student_id: Number(studentId)
+        }
+      )
+      return response.status(204).send()
     } catch (error) {
       return response.status(400).json({ Message: error.message })
     }
   }
 
-  static async deleteRegistration(request, response) {
+  static async delete(request, response) {
     const { studentId, registrationId } = request.params
     try {
       await registrationsServices.destroy({
         id: Number(registrationId),
         student_id: Number(studentId)
       })
-      return response
-        .status(200)
-        .json({ Message: `Registration with id: ${registrationId} deleted` })
+      return response.status(204).send()
     } catch (error) {
       return response.status(400).json({ Message: error.message })
     }
   }
 
-  static async getAllRegistrationsFromOneClazz(request, response) {
-    const { clazzId } = request.params
+  static async getRegistrationsPerClass(request, response) {
+    const { classeId } = request.params
     try {
-      const result = await registrationsServices.findAndCount(
+      const result = await registrationsServices.findAndCountRegistrations(
         {
-          clazz_id: Number(clazzId),
+          clazz_id: Number(classeId),
           status: 'active'
         },
         {
