@@ -15,21 +15,42 @@ module.exports = (sequelize, DataTypes) => {
     {
       name: {
         type: DataTypes.STRING,
+        allowNull: false,
         validate: {
-          len: [2, 10]
-        }
-      },
-      active: DataTypes.BOOLEAN,
-      email: {
-        type: DataTypes.STRING,
-        validate: {
-          isEmail: {
-            args: true,
-            msg: 'Invalid e-mail data type'
+          notEmpty: {
+            msg: 'Please enter the name.'
+          },
+          len: {
+            args: [4, 20],
+            msg: 'The name must contain between 4 and 20 characters.'
           }
         }
       },
-      role: DataTypes.STRING
+      active: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          isEmail: {
+            args: true,
+            msg: 'Invalid e-mail data type.'
+          }
+        }
+      },
+      role: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          validateRole: role => {
+            if (role !== 'student' || role !== 'teacher') {
+              throw new Error('Role accept: student or teacher.')
+            }
+          }
+        }
+      }
     },
     {
       defaultScope: {
