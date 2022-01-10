@@ -15,7 +15,9 @@ class LevelController {
     const { id } = request.params
     try {
       const result = await levelsServices.getOne(Number(id))
-      return response.status(200).json(result)
+      return response
+        .status(200)
+        .json({ id: result.id, level_description: result.level_description })
     } catch (error) {
       return response.status(400).json({ Message: error.message })
     }
@@ -25,7 +27,9 @@ class LevelController {
     const { level_description } = request.body
     try {
       const result = await levelsServices.create({ level_description })
-      return response.status(201).json(result)
+      return response
+        .status(201)
+        .json({ id: result.id, level_description: result.level_description })
     } catch (error) {
       return response.status(400).json({ Message: error.message })
     }
