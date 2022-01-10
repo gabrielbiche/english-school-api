@@ -44,10 +44,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          validateRole: role => {
-            if (role !== 'student' || role !== 'teacher') {
-              throw new Error('Role accept: student or teacher.')
-            }
+          isIn: {
+            args: [['student', 'teacher']],
+            msg: 'Role accepted: student or teacher.'
           }
         }
       }
