@@ -2,7 +2,7 @@ const { LevelsServices } = require('../services')
 const levelsServices = new LevelsServices()
 
 class LevelController {
-  static async getAllLevels(request, response) {
+  static async getAll(request, response) {
     try {
       const result = await levelsServices.getAll()
       return response.status(200).json(result)
@@ -11,9 +11,9 @@ class LevelController {
     }
   }
 
-  static async getALevel(request, response) {
+  static async getOne(request, response) {
+    const { id } = request.params
     try {
-      const { id } = request.params
       const result = await levelsServices.getOne(Number(id))
       return response.status(200).json(result)
     } catch (error) {
@@ -21,35 +21,32 @@ class LevelController {
     }
   }
 
-  static async createLevel(request, response) {
+  static async create(request, response) {
+    const { level_description } = request.body
     try {
-      const data = request.body
-      const result = await levelsServices.create(data)
+      const result = await levelsServices.create({ level_description })
       return response.status(201).json(result)
     } catch (error) {
       return response.status(400).json({ Message: error.message })
     }
   }
 
-  static async updateLevel(request, response) {
+  static async update(request, response) {
+    const { id } = request.params
+    const { level_description } = request.body
     try {
-      const { id } = request.params
-      const data = request.body
-      await levelsServices.update(data, Number(id))
-      const result = await levelsServices.getOne(Number(id))
-      return response.status(200).json(result)
+      await levelsServices.update({ level_description }, Number(id))
+      return response.status(204).send()
     } catch (error) {
       return response.status(400).json({ Message: error.message })
     }
   }
 
-  static async deleteLevel(request, response) {
+  static async delete(request, response) {
+    const { id } = request.params
     try {
-      const { id } = request.params
       await levelsServices.destroy(Number(id))
-      return response
-        .status(200)
-        .json({ Message: `Level with id: ${id} deleted` })
+      return response.status(204).send()
     } catch (error) {
       return response.status(400).json({ Message: error.message })
     }
