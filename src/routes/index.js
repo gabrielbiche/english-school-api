@@ -4,6 +4,7 @@ const peopleRoute = require('./peopleRoute')
 const levelsRoute = require('./levelsRoute')
 const registrationsRoute = require('./registrationsRoute')
 const clazzesRoute = require('./clazzesRoute')
+const usersRoute = require('./usersRoute')
 
 const app = express()
 
@@ -12,7 +13,8 @@ app.use(
   peopleRoute,
   levelsRoute,
   registrationsRoute,
-  clazzesRoute
+  clazzesRoute,
+  usersRoute
 )
 
 module.exports = app
