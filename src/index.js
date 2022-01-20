@@ -1,4 +1,7 @@
 const express = require('express')
+require('dotenv').config()
+require('./authentications/authentication')
+require('../redis/blacklist')
 
 const router = require('./routes')
 

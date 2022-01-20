@@ -10,10 +10,17 @@
   "author": "Gabriel da Silva Biche",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^14.2.0",
     "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "mysql2": "^2.3.3",
+    "passport": "^0.5.2",
+    "passport-http-bearer": "^1.0.1",
+    "passport-local": "^1.0.0",
     "path": "^0.12.7",
+    "redis": "^4.0.2",
     "sequelize": "^6.12.5"
   },
   "devDependencies": {
