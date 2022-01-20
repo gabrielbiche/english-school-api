@@ -20,6 +20,10 @@ class RegistrationsServices extends Services {
       aggregators
     )
   }
+
+  async deleteRegistration(where){
+    return database[this.model].destroy({ where: { ...where } })
+  }
 }
 
 module.exports = RegistrationsServices

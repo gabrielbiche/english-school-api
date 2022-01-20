@@ -61,7 +61,7 @@ class RegistrationController {
   static async delete(request, response) {
     const { studentId, registrationId } = request.params
     try {
-      await registrationsServices.destroy({
+      await registrationsServices.deleteRegistration({
         id: Number(registrationId),
         student_id: Number(studentId)
       })

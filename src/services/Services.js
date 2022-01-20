@@ -1,6 +1,5 @@
 const database = require('../models')
 
-
 class Services {
   constructor(model) {
     this.model = model
@@ -26,8 +25,8 @@ class Services {
     )
   }
 
-  async destroy(where) {
-    return database[this.model].destroy({ where: { ...where } })
+  async destroy(id) {
+    return database[this.model].destroy({ where: { id: id } })
   }
 
   async restore(id) {
