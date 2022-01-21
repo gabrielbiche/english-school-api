@@ -1,5 +1,5 @@
 /node_modules
 .prettierrc
-.sequelizerc
 .env
+
 /src/database/seeders
