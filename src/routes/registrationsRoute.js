@@ -9,7 +9,7 @@ router.get(
   RegistrationController.getOne
 )
 router.get(
-  '/people/registration/:classeId',
+  '/people/registrations/:classeId',
   RegistrationController.getRegistrationsPerClass
 )
 router.post(
