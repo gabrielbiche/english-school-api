@@ -25,17 +25,16 @@ class PeopleServices extends Services {
 
   async cancelPerson(id) {
     return database.sequelize.transaction(async transaction => {
-      await super.updateWithTransaction({ active: false }, id, {
+      await super.update({ active: false }, id, {
         transaction: transaction
       })
-      await this.registrations.updateWithTransaction(
-        { status: 'cancel' },
+      await this.registrations.update(
+        { status: 'inactive' },
         { student_id: id },
         { transaction: transaction }
       )
     })
   }
-
 }
 
 module.exports = PeopleServices
